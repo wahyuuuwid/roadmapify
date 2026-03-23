@@ -2,13 +2,20 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import { Navbar } from './components/layouts/navbar.tsx'
-import { Footer } from './components/layouts/footer.tsx'
+import { Navbar } from './components/layouts/Navbar.tsx'
+import { Footer } from './components/layouts/Footer.tsx'
+import { BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Navbar />
-      <App />
-    <Footer />
+    <BrowserRouter>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="grow">
+        <App />
+      </main>
+      <Footer />
+    </div>
+    </BrowserRouter>
   </StrictMode>,
 )

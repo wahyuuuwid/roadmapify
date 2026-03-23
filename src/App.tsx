@@ -1,11 +1,18 @@
+import { Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Detail from "./pages/Detail";
+import NotFound from "./pages/NotFound";
+
 function App() {
   return (
-    <>
-     <h1 className="text-3xl font-bold text-green-500">
-      Hello Tailwind 🚀
-    </h1>
-    </>
-  )
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/detail/:id" element={<Detail />} />
+
+      {/* 404 not found */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }
 
-export default App
+export default App;
