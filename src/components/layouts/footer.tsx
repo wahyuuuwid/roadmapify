@@ -6,20 +6,20 @@ export const Footer = () => {
 
   const footerLinks = {
     product: [
-      { name: "Features", href: "#" },
+    //   { name: "Features", href: "#" },
       { name: "API", href: "#" },
       { name: "Integrations", href: "#" },
     ],
     
     resources: [
       { name: "Documentation", href: "#" },
-      { name: "Help Center", href: "#" },
-      { name: "Contact", href: "#" },
+      { name: "Pusat Bantuan", href: "/pusat-bantuan" },
+      { name: "Kontak", href: "/kontak" },
     ],
     legal: [
-      { name: "Privacy", href: "#" },
-      { name: "Terms", href: "#" },
-      { name: "Cookies", href: "#" },
+      { name: "Privacy", href: "/privacy-policy" },
+      { name: "Terms", href: "/terms-and-conditions" },
+    //   { name: "Cookies", href: "#" },
     ],
   };
 
@@ -145,9 +145,9 @@ export const Footer = () => {
             © {currentYear} Roadmapify. All rights reserved.
           </p>
           <div className="flex items-center gap-6 text-sm text-gray-500">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Cookies</a>
+            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms-and-conditions" className="hover:text-white transition-colors">Terms and Conditions</a>
+            {/* <a href="#" className="hover:text-white transition-colors">Cookies</a> */}
           </div>
         </div>
       </div>
