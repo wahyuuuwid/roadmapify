@@ -24,10 +24,8 @@ export const Footer = () => {
   };
 
   const socialLinks = [
-    { name: "GitHub", icon: BookOpen, href: "#" },
-    { name: "Twitter", icon: Sparkles, href: "#" },
-    { name: "LinkedIn", icon: ArrowUpRight, href: "#" },
-    { name: "Email", icon: Mail, href: "#" },
+    { name: "GitHub", icon: '/github-icon.png', href: "#" },
+    { name: "Email", icon: '/github-icon.png', href: "#" },
   ];
 
   return (
@@ -50,16 +48,7 @@ export const Footer = () => {
               Bangun jalur pembelajaran personal dengan AI dan kuasai keterampilan melalui roadmap yang terstruktur.
             </p>
             <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  className="p-2 rounded-lg bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-200 border border-white/5 hover:border-white/20"
-                  aria-label={social.name}
-                >
-                  <social.icon className="w-4 h-4" />
-                </a>
-              ))}
+            
             </div>
           </div>
 
