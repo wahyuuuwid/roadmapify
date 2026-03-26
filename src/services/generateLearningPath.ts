@@ -2,7 +2,7 @@ import api from "./api";
 
 export const generateLearningPath = async (topicData: any) => {
   try {
-    const response = await api.post("/api/v1/generate", {
+    const response = await api.post("/generate", {
         topic: topicData
     });
     return response.data;
