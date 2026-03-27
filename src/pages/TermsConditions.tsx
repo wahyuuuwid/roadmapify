@@ -38,7 +38,7 @@ function TermsConditions() {
   ];
 
   return (
-    <div className='min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden'>
+    <div className='min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden pt-10'>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-1/4 left-0 w-[400px] h-[400px] bg-purple-600/10 rounded-full blur-[100px]" />
@@ -103,8 +103,7 @@ function TermsConditions() {
 
         <div className="mt-8 text-center p-6 border-t border-white/10">
           <p className="text-gray-500 text-sm">
-            Kami dapat memperbarui syarat ini sewaktu-waktu. Perubahan signifikan akan dinotifikasi via email 
-            minimal 14 hari sebelum efektif.
+            Kami dapat memperbarui syarat ini sewaktu-waktu.
           </p>
         </div>
       </div>
