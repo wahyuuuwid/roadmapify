@@ -1,20 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Sparkles, ArrowRight, BookOpen, Target } from "lucide-react";
+import { Sparkles, ArrowRight, BookOpen } from "lucide-react";
 import useTypingPlaceholder from "../utils/DynamicTyping";
+import { generateLearningPath } from "../services/generateLearningPath";
+import LoadingScreen from "../components/layouts/LoadingScreen";
 
 function Home() {
   const navigate = useNavigate();
   const [topic, setTopic] = useState("");
   const [isHovered, setIsHovered] = useState(false);
-
-  const generatePath = () => {
-    if (!topic.trim()) return;
-    navigate(`/detail/${topic}`);
-  };
+  const [isLoading, setIsLoading] = useState(false);
+  
 
   const handleKeyDown = (e:any) => {
-    if (e.key === 'Enter') generatePath();
+    if (e.key === 'Enter') handleGenerate();
   };
 
   const suggestions = [
@@ -39,13 +38,33 @@ const recommendations = [
   "Frontend Developer",
 ];
 
-const handleRecommendationClick = (item:any) => {
+const handleRecommendationClick = async (item:any) => {
   setTopic(item);
-  generatePath(); 
+  await handleGenerate(item);
+};
+
+
+const handleGenerate = async (inputTopic?: string) => {
+  const finalTopic = inputTopic || topic;
+
+  if (!finalTopic.trim()) return;
+
+  setIsLoading(true);
+  try {
+    const data = await generateLearningPath(finalTopic);
+    navigate(`/roadmap/${data.data.id}`);
+    setTopic("");
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setIsLoading(false);
+  }
 };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden flex items-center justify-center px-4 pt-16">
+    <>
+      <LoadingScreen isLoading={isLoading} />
+      <div className="min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden flex items-center justify-center px-4 pt-26">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse delay-1000" />
@@ -69,7 +88,7 @@ const handleRecommendationClick = (item:any) => {
           </div>
         </div>
 
-        <h1 className="text-5xl md:text-6xl font-bold text-center mb-4 bg-linear-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent">
+        <h1 className="text-4xl md:text-6xl font-bold text-center mb-4 bg-linear-to-r from-white via-indigo-200 to-indigo-400 bg-clip-text text-transparent">
           Asisten Pengembangan
           <br />
           Skill Pribadi
@@ -85,7 +104,7 @@ const handleRecommendationClick = (item:any) => {
           <div className="relative bg-gray-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl">
             <div className="mb-6">
               <label className="flex items-center gap-2 text-sm font-medium text-gray-300 mb-3">
-                <Target className="w-4 h-4 text-indigo-400" />
+                {/* <Target className="w-4 h-4 text-indigo-400" /> */}
                 Topik yang ingin dipelajari
               </label>
               <div className="relative">
@@ -102,7 +121,7 @@ const handleRecommendationClick = (item:any) => {
             </div>
 
             <button
-              onClick={generatePath}
+              onClick={() => handleGenerate()}
               disabled={!topic.trim()}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
@@ -131,6 +150,8 @@ const handleRecommendationClick = (item:any) => {
         </div>
       </div>
     </div>
+    </>
+    
   );
 }
 

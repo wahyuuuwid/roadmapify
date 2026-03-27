@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Send, 
   Mail, 
@@ -19,7 +19,7 @@ function Kontak() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e:any) => {
       setMousePosition({
         x: (e.clientX / window.innerWidth) * 100,
         y: (e.clientY / window.innerHeight) * 100
@@ -29,16 +29,16 @@ function Kontak() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
     setIsSubmitting(true);
     await new Promise(resolve => setTimeout(resolve, 2000));
     setIsSubmitting(false);
     setFormData({ nama: '', email: '', pesan: '' });
-    alert('Pesan berhasil dikirim! 🚀');
+    alert('Pesan berhasil dikirim!');
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -50,11 +50,11 @@ function Kontak() {
   ];
 
   return (
-    <div className='min-h-screen bg-[#0a0a0f] pb-20 text-white relative overflow-hidden flex items-center justify-center px-4 pt-16'>
+    <div className='min-h-screen bg-[#0a0a0f] pb-20 text-white relative overflow-hidden flex items-center justify-center px-4 pt-26'>
       
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div 
-          className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-30 transition-all duration-1000 ease-out"
+          className="absolute w-150 h-150 rounded-full blur-[120px] opacity-30 transition-all duration-1000 ease-out"
           style={{
             background: 'radial-gradient(circle, rgba(99,102,241,0.4) 0%, rgba(168,85,247,0.2) 50%, transparent 70%)',
             left: `${mousePosition.x - 30}%`,
@@ -63,7 +63,7 @@ function Kontak() {
           }}
         />
         <div 
-          className="absolute w-[400px] h-[400px] rounded-full blur-[100px] opacity-20 animate-pulse"
+          className="absolute w-100 h-100 rounded-full blur-[100px] opacity-20 animate-pulse"
           style={{
             background: 'radial-gradient(circle, rgba(236,72,153,0.4) 0%, transparent 70%)',
             right: '10%',
@@ -105,7 +105,7 @@ function Kontak() {
           <div className="lg:col-span-2 space-y-4">
             {[
               { icon: Mail, title: 'Email', value: 'idwahyu58@gmail.com'},
-              { icon: Phone, title: 'Telepon', value: '+62 857 8614 4772'},
+              { icon: Phone, title: 'Whatsapp', value: '+62 857 8614 4772'},
               { icon: MapPin, title: 'Lokasi', value: 'Purwokerto, Jawa Tengah, Indonesia'},
             ].map((item, index) => (
               <div 
@@ -126,26 +126,12 @@ function Kontak() {
               </div>
             ))}
 
-            <div className="pt-6">
-              <p className="text-sm text-gray-500 mb-4 uppercase tracking-wider font-medium">Ikuti Kami</p>
-              <div className="flex gap-3">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    className={`p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-white/10 ${social.color} group`}
-                    aria-label={social.label}
-                  >
-                    <social.icon className="w-5 h-5" />
-                  </a>
-                ))}
-              </div>
-            </div>
+            
           </div>
 
           <div className="lg:col-span-3">
             <div className="relative p-8 md:p-10 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl overflow-hidden">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/20 via-transparent to-indigo-500/20 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              <div className="absolute inset-0 rounded-3xl bg-linear-to-r from-purple-500/20 via-transparent to-indigo-500/20 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
               <form onSubmit={handleSubmit} className="relative space-y-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-300 ml-1">Nama Lengkap</label>
@@ -196,9 +182,9 @@ function Kontak() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="relative w-full py-4 px-8 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold overflow-hidden group hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="relative w-full py-4 px-8 rounded-xl bg-linear-to-r from-purple-600 to-indigo-600 text-white font-semibold overflow-hidden group hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <span className="relative flex items-center justify-center gap-2">
                     {isSubmitting ? (
                       <>
