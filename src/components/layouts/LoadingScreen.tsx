@@ -42,7 +42,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
     },
   ];
 
-  useEffect(() => {
+   useEffect(() => {
     if (!isLoading) {
       setCurrentStatus(0);
       setProgress(0);
@@ -52,7 +52,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) return 100;
-        return prev + 1.5;
+        return prev + 2; 
       });
     }, 100);
 
@@ -61,7 +61,7 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
         if (prev < statuses.length - 1) return prev + 1;
         return prev;
       });
-    }, 1200);
+    }, 1000); 
 
     return () => {
       clearInterval(progressInterval);
@@ -75,7 +75,6 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0a0f]/90 backdrop-blur-md sm:backdrop-blur-xl px-4">
-      {/* Background glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-1/3 w-72 sm:w-96 h-72 sm:h-96 bg-indigo-600/10 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-1/3 right-1/3 w-72 sm:w-96 h-72 sm:h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse delay-700" />
@@ -84,13 +83,11 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
       <div className="relative w-full max-w-sm sm:max-w-md mx-4">
         <div className="relative bg-gray-900/80 backdrop-blur-2xl border border-white/10 rounded-3xl p-5 sm:p-8 shadow-2xl">
           <div className="absolute -inset-1 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 rounded-3xl blur-xl opacity-50" />
-
           <div className="relative flex flex-col items-center text-center space-y-5 sm:space-y-6">
-            {/* Icon */}
             <div
               className={`
-                relative p-3 sm:p-4 rounded-2xl ${statuses[currentStatus].bgColor} 
-                transition-all duration-500 ease-out transform will-change-transform
+                relative p-3 sm:p-4 rounded-2xl ${statuses[currentStatus].bgColor}
+                transition-all duration-500 ease-out transform
               `}
             >
               <CurrentIcon
@@ -99,12 +96,11 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
               <div className="absolute inset-0 rounded-2xl animate-ping opacity-20 bg-white/20" />
             </div>
 
-            {/* Status text */}
-            <div className="h-6 sm:h-8 overflow-hidden">
+            <div className="h-7 sm:h-8 overflow-hidden">
               <div
-                className="transition-transform duration-500 ease-out will-change-transform"
+                className="transition-transform duration-500 ease-out"
                 style={{
-                  transform: `translateY(-${currentStatus * 1.5}rem)`,
+                  transform: `translateY(-${currentStatus * (window.innerWidth >= 640 ? 2 : 1.5)}rem)`,
                 }}
               >
                 {statuses.map((status, index) => (
@@ -126,7 +122,6 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
               </div>
             </div>
 
-            {/* Progress */}
             <div className="w-full space-y-2">
               <div className="flex justify-between text-xs sm:text-sm text-gray-400 px-1">
                 <span>Dalam proses</span>
@@ -143,7 +138,6 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
               </div>
             </div>
 
-            {/* Steps indicator */}
             <div className="flex gap-2">
               {statuses.map((_, index) => (
                 <div
@@ -157,12 +151,10 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
               ))}
             </div>
 
-            {/* Spinner */}
             <Loader2 className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 animate-spin" />
           </div>
         </div>
 
-        {/* Bottom text */}
         <p className="text-center text-gray-500 text-xs sm:text-sm mt-5 sm:mt-6 animate-pulse">
           Tunggu sebentar yaa~
         </p>
