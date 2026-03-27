@@ -7,6 +7,8 @@ import Kontak from "./pages/Kontak";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
 import PusatBantuan from "./pages/HelpCenter";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 
 function App() {
   return (
@@ -19,6 +21,9 @@ function App() {
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/terms-and-conditions" element={<TermsConditions />} />
       <Route path="/pusat-bantuan" element={<PusatBantuan />} />
+
+      <Route path="/auth/login" element={ <Login />} />
+      <Route path="/auth/register" element={<Register />} />
 
       {/* 404 not found */}
       <Route path="*" element={<NotFound />} />
