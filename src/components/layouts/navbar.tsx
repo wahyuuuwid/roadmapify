@@ -1,10 +1,26 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Sparkles, BookOpen } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, Sparkles } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { ProfileMenu } from "../ui/ProfilMenu";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const [user, setUser] = useState(() => {
+    try {
+      const savedUser = localStorage.getItem("user");
+      return savedUser ? JSON.parse(savedUser) : null;
+    } catch {
+    return null;
+  }
+});
+
+  window.addEventListener("storage", () => {
+  const savedUser = localStorage.getItem("user");
+  setUser(savedUser ? JSON.parse(savedUser) : null);
+});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,11 +31,35 @@ export const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Tentang Kami", href: "/tentang-kami" },
+    { name: "Beranda", href: "/" },
+    { name: "Tentang", href: "/tentang" },
     { name: "Kontak", href: "/kontak" },
     // { name: "About", href: "/about" },
   ];
+
+
+useEffect(() => {
+  setIsMobileMenuOpen(false);
+}, [location.pathname]);
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isMobileMenuOpen &&
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <nav
@@ -54,17 +94,22 @@ export const Navbar = () => {
                 className="relative text-gray-300 hover:text-white transition-colors duration-300 text-sm font-medium group"
               >
                 {link.name}
-                {/* <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-linear-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" /> */}
               </Link>
             ))}
             
-            <button className="relative px-6 py-2.5 rounded-full bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-medium text-sm transition-all duration-300 shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40 overflow-hidden group">
-              <span className="relative z-10 flex items-center gap-2">
-                <Sparkles className="w-4 h-4" />
-                Get Started
-              </span>
-              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-            </button>
+            {
+              user ? (
+                <ProfileMenu user={user} />
+              ): (
+                <Link to={`/auth/login/?ref=${Math.random().toString(36).substring(2)}`} className="relative px-6 py-2.5 rounded-full bg-linear-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-medium text-sm transition-all duration-300 shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40 overflow-hidden group">
+                  <span className="relative z-10 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4" />
+                    Gabung sekarang
+                  </span>
+                  <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                </Link>
+              )
+            }
           </div>
 
           <button
@@ -77,7 +122,8 @@ export const Navbar = () => {
       </div>
 
       <div
-        className={`md:hidden absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-xl border-b border-white/10 transition-all duration-300 ${
+      ref={menuRef}
+        className={`md:hidden absolute z-60 top-full left-0 w-full bg-gray-900/95 backdrop-blur-xl border-b border-white/10 transition-all duration-300 ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >
@@ -92,10 +138,18 @@ export const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <button className="w-full mt-4 px-6 py-3 rounded-xl bg-linear-to-r from-indigo-600 to-purple-600 text-white font-medium flex items-center justify-center gap-2">
-            <Sparkles className="w-4 h-4" />
-            Get Started
-          </button>
+          {
+            user ? (
+              <Link className="block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 font-medium" to={'/dashboard'} >
+                Dasboard
+              </Link>
+            ): (
+              <Link to={`/auth/login/?ref=${Math.random().toString(36).substring(2)}`} className="w-full mt-4 px-6 py-3 rounded-xl bg-linear-to-r from-indigo-600 to-purple-600 text-white font-medium flex items-center justify-center gap-2">
+                <Sparkles className="w-4 h-4" />
+                Gabung sekarang
+              </Link>
+            )
+          }
         </div>
       </div>
     </nav>
