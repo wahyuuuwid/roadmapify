@@ -2,8 +2,11 @@ import api from "./api";
 
 export const generateLearningPath = async (topicData: any) => {
   try {
+    const user = localStorage.getItem("user");
+    const userObj = user ? JSON.parse(user) : null;
     const response = await api.post("/generate", {
-        topic: topicData
+        topic: topicData,
+        userID: userObj?.id || ""
     });
     return response.data;
   } catch (error: any) {
