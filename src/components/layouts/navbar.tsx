@@ -140,7 +140,7 @@ useEffect(() => {
           ))}
           {
             user ? (
-              <Link className="block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 font-medium" to={'/dashboard'} >
+              <Link className="block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 font-medium" to={'/akun/dashboard'} >
                 Dasboard
               </Link>
             ): (
