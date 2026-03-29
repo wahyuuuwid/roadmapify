@@ -46,8 +46,8 @@ export const ProfileMenu = ({ user }: ProfileMenuProps) => {
   };
 
   const menuItems = [
-    { label: "Profile", icon: <User size={18} />, link: `/profile/${user?.id || "" }` },
-    { label: "Dashboard", icon: <LayoutDashboard size={18} />, link: "/dashboard" },
+    // { label: "Profile", icon: <User size={18} />, link: `/akun/profile` },
+    { label: "Dashboard", icon: <LayoutDashboard size={18} />, link: "/akun/dashboard" },
   ];
 
   return (
