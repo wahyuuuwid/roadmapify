@@ -8,7 +8,7 @@ import {
 function PusatBantuan() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [openFaq, setOpenFaq] = useState(null);
+  const [openFaq, setOpenFaq] = useState<any>(null);
 
   const categories = [
     { id: 'all', label: 'Semua', icon: HelpCircle },
@@ -103,7 +103,7 @@ function PusatBantuan() {
   });
 
   return (
-    <div className='min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden'>
+    <div className='min-h-screen bg-[#0a0a0f] text-white relative overflow-hidden pt-10'>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-purple-600/10 rounded-full blur-[120px]" />
       </div>
