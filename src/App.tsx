@@ -9,6 +9,9 @@ import TermsConditions from "./pages/TermsConditions";
 import PusatBantuan from "./pages/HelpCenter";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import Dashboard from "./pages/account/Dashboard";
+import Profile from "./pages/account/Profile";
+import { AuthOnly, GuestOnly } from "./guards";
 
 function App() {
   return (
@@ -22,8 +25,23 @@ function App() {
       <Route path="/terms-and-conditions" element={<TermsConditions />} />
       <Route path="/pusat-bantuan" element={<PusatBantuan />} />
 
-      <Route path="/auth/login" element={ <Login />} />
-      <Route path="/auth/register" element={<Register />} />
+      <Route path="/auth/login" element={ 
+        <GuestOnly>
+          <Login />
+        </GuestOnly>
+      } />
+      <Route path="/auth/register" element={
+        <GuestOnly>
+          <Register />
+        </GuestOnly>
+      } />
+
+      <Route path="/akun/dashboard" element={
+        < AuthOnly>
+          <Dashboard />
+        </AuthOnly>
+      } />
+      <Route path="/akun/profile" element={<Profile />} />
 
       {/* 404 not found */}
       <Route path="*" element={<NotFound />} />
