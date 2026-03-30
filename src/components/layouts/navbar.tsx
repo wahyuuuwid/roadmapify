@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles, LogOut } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { ProfileMenu } from "../ui/ProfilMenu";
 
@@ -60,6 +60,12 @@ useEffect(() => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isMobileMenuOpen]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/";
+  };
 
   return (
     <nav
@@ -140,9 +146,18 @@ useEffect(() => {
           ))}
           {
             user ? (
+              <>
               <Link className="block px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-200 font-medium" to={'/akun/dashboard'} >
                 Dasboard
               </Link>
+              <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xl transition-all duration-200 group"
+            >
+              <LogOut size={18} className="group-hover:translate-x-1 transition-transform" />
+              <span>Logout</span>
+            </button>
+              </>
             ): (
               <Link to={`/auth/login/?ref=${Math.random().toString(36).substring(2)}`} className="w-full mt-4 px-6 py-3 rounded-xl bg-linear-to-r from-indigo-600 to-purple-600 text-white font-medium flex items-center justify-center gap-2">
                 <Sparkles className="w-4 h-4" />
