@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import api from "./api";
 
 export const generateLearningPath = async (topicData: any) => {
@@ -10,7 +11,8 @@ export const generateLearningPath = async (topicData: any) => {
     });
     return response.data;
   } catch (error: any) {
-    console.error("API Error:", error.response?.data || error.message);
+    toast.error('Terjadi kesalahan, silahkan coba lagi.');
+    // console.error("API Error:", error.response?.data || error.message);
     throw error;
   }
 };
