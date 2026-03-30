@@ -10,8 +10,6 @@ function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const location = useLocation();
   const from = location.state?.from || "/akun/dashboard";
-  console.log(location);
-  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +25,6 @@ function Login() {
     
     try {
     const data = await LoginService(formData);
-    console.log(data);
     
     if (data.success) {
       setMsg({ type: 'success', text: 'Login berhasil!' });
