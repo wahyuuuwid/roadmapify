@@ -8,7 +8,10 @@ Aplikasi berbasis AI yang menghasilkan learning path terstruktur dan dipersonali
 
 ## 📸 Screenshot
 ### Homepage
-![Homepage](./docs/homepage.png)
+<p align="center">
+  <img src="./public/home.png" width="800"/>
+</p>
+
 
 ### Generate Learning Path
 ![Generate](./docs/result-generate.png)
