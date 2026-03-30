@@ -14,11 +14,11 @@ createRoot(document.getElementById('root')!).render(
     <ScrollToTop />
     <Toaster position="bottom-right" richColors  /> 
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      {/* <Navbar /> */}
         <main className="grow">
         <App />
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
     </BrowserRouter>
   </StrictMode>,
