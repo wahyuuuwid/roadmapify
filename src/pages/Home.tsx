@@ -64,7 +64,8 @@ function Home() {
       navigate(`/roadmap/${data.data.id}`);
       setTopic("");
     } catch (err) {
-      console.error(err);
+      // console.error(err);
+      setIsLoading(false);
     } finally {
       setIsLoading(false);
     }
