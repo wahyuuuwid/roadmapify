@@ -48,3 +48,8 @@ npm install
 npm run dev
 
 # Akses di http://localhost:5173
+```
+
+## 📄 License
+
+Project ini menggunakan lisensi MIT.
