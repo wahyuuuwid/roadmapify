@@ -6,11 +6,13 @@ import { Navbar } from './components/layouts/Navbar.tsx'
 import { Footer } from './components/layouts/Footer.tsx'
 import { BrowserRouter } from 'react-router-dom'
 import ScrollToTop from './components/layouts/ScrollToTop.tsx'
+import { Toaster } from 'sonner'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
     <ScrollToTop />
+    <Toaster position="bottom-right" richColors  /> 
     <div className="min-h-screen flex flex-col">
       <Navbar />
         <main className="grow">
