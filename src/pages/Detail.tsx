@@ -70,8 +70,6 @@ function Detail() {
   const fetchLearningPath = async () => {
     try {
       const res = await getLearningPath(id);
-      console.log(res);
-
       setData(res.data);
     } catch (err) {
       console.error(err);
