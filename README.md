@@ -4,8 +4,6 @@ Roadmapify adalah aplikasi web yang menggunakan kecerdasan buatan (AI) untuk men
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![AI](https://img.shields.io/badge/AI-Gemini%20|%20OpenAI-orange.svg)
-![Tech Stack](https://img.shields.io/badge/stack-MERN-purple.svg)
 
 ---
 
